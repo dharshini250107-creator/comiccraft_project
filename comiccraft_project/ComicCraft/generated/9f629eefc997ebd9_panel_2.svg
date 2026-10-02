@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+    <defs>
+      <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#1e1b4b" />
+        <stop offset="100%" stop-color="#4338ca" />
+      </linearGradient>
+      <pattern id="dots" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+        <circle cx="2" cy="2" r="2" fill="#6366f1" opacity="0.25"/>
+      </pattern>
+    </defs>
+    <rect width="800" height="600" fill="url(#bgGrad)"/>
+    <rect width="800" height="600" fill="url(#dots)"/>
+
+    <!-- Dynamic Art Shapes -->
+    <circle cx="400" cy="260" r="180" fill="#6366f1" opacity="0.4"/>
+    <polygon points="400,100 450,220 570,220 470,290 510,410 400,330 290,410 330,290 230,220 350,220" fill="#fb7185" opacity="0.3"/>
+
+    <!-- Panel Border -->
+    <rect x="20" y="20" width="760" height="560" fill="none" stroke="#ffffff" stroke-width="8" rx="16"/>
+
+    <!-- Header Tag -->
+    <rect x="40" y="40" width="220" height="48" fill="#000000" opacity="0.75" rx="8"/>
+    <text x="55" y="72" font-family="sans-serif" font-size="22" font-weight="bold" fill="#fb7185">PANEL 2</text>
+
+    <!-- Character Silhouette / Icon -->
+    <g transform="translate(400, 270)">
+      <circle cx="0" cy="-40" r="50" fill="#fb7185"/>
+      <path d="M-80,80 Q0,-10 80,80 Z" fill="#fb7185"/>
+      <text x="0" y="-32" font-family="sans-serif" font-size="36" text-anchor="middle">🎨</text>
+    </g>
+
+    <!-- Style & Setting Badge -->
+    <rect x="40" y="500" width="720" height="60" fill="#000000" opacity="0.7" rx="8"/>
+    <text x="60" y="538" font-family="sans-serif" font-size="20" font-weight="600" fill="#ffffff">Cyber Alex in Neon City (ANIME • ACTION-PACKED)</text>
+  </svg>

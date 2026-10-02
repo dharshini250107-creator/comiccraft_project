@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ComicCraft – Turn Your Ideas Into Comics</title>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="app-layout">
+    <!-- LEFT SIDEBAR NAVIGATION -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <div class="logo-icon">
+            <i data-lucide="wand-sparkles"></i>
+          </div>
+          <span class="logo-text">ComicCraft</span>
+        </div>
+        <button class="mobile-toggle-btn" id="mobileToggleBtn" aria-label="Toggle menu">
+          <i data-lucide="menu"></i>
+        </button>
+      </div>
+
+      <nav class="sidebar-nav">
+        <button class="nav-item active" data-view="dashboardView">
+          <i data-lucide="layout-dashboard"></i>
+          <span>Dashboard</span>
+        </button>
+        <button class="nav-item" data-view="createComicView">
+          <i data-lucide="wand-sparkles"></i>
+          <span>Create Comic</span>
+        </button>
+        <button class="nav-item" data-view="myComicsView">
+          <i data-lucide="book-open"></i>
+          <span>My Comics</span>
+        </button>
+        <button class="nav-item" data-view="charactersView">
+          <i data-lucide="users"></i>
+          <span>Characters</span>
+        </button>
+        <button class="nav-item" data-view="galleryView">
+          <i data-lucide="images"></i>
+          <span>Gallery</span>
+        </button>
+        <button class="nav-item" data-view="templatesView">
+          <i data-lucide="layout-template"></i>
+          <span>Templates</span>
+        </button>
+        <button class="nav-item" data-view="settingsView">
+          <i data-lucide="settings"></i>
+          <span>Settings</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-profile">
+          <div class="user-avatar">
+            <i data-lucide="user"></i>
+          </div>
+          <div class="user-info">
+            <span class="user-name">College Student</span>
+            <span class="user-role">Student Creator</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="main-content">
+      <!-- TOPBAR HEADER -->
+      <header class="topbar">
+        <div class="topbar-search">
+          <i data-lucide="search" class="search-icon"></i>
+          <input type="text" placeholder="Search comics, characters, templates..." id="globalSearch">
+        </div>
+        <div class="topbar-actions">
+          <button class="btn btn-secondary btn-sm" id="topCreateBtn">
+            <i data-lucide="plus"></i>
+            <span>New Story</span>
+          </button>
+          <div class="notification-badge">
+            <i data-lucide="bell"></i>
+          </div>
+        </div>
+      </header>
+
+      <!-- VIEW 1: DASHBOARD -->
+      <section id="dashboardView" class="view-screen active">
+        <!-- Hero Section -->
+        <div class="hero-card">
+          <div class="hero-content">
+            <h1 class="hero-title">Bring Your Ideas to Life with ComicCraft</h1>
+            <p class="hero-subtitle">
+              Write a simple idea, and let AI turn it into a story with characters, dialogues and beautiful comic panels.
+            </p>
+            <div class="hero-actions">
+              <button class="btn btn-primary" id="heroCreateBtn">
+                <i data-lucide="wand-sparkles"></i>
+                <span>Create New Comic</span>
+              </button>
+              <button class="btn btn-outline" id="heroHowItWorksBtn">
+                <i data-lucide="help-circle"></i>
+                <span>Explore How It Works</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 Feature Cards -->
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon-box">
+              <i data-lucide="file-text"></i>
+            </div>
+            <h3 class="feature-title">AI Story Generation</h3>
+            <p class="feature-desc">Converts raw prompts into structured panel scripts with scenes and natural dialogues.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon-box">
+              <i data-lucide="panels-top-left"></i>
+            </div>
+            <h3 class="feature-title">AI Comic Creation</h3>
+            <p class="feature-desc">Generates multi-panel visual storyboards tailored to your chosen art style.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon-box">
+              <i data-lucide="users"></i>
+            </div>
+            <h3 class="feature-title">Character Consistency</h3>
+            <p class="feature-desc">Maintains recurring character details, faces, and outfits across consecutive panels.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon-box">
+              <i data-lucide="layout-template"></i>
+            </div>
+            <h3 class="feature-title">Smart Templates</h3>
+            <p class="feature-desc">Pre-configured story layouts designed for academic, scientific, and creative topics.</p>
+          </div>
+        </div>
+
+        <!-- Recent Projects Section -->
+        <div class="section-container mt-32">
+          <div class="section-header-flex">
+            <div>
+              <h2 class="section-title">Recent Projects</h2>
+              <p class="section-desc">Continue working on your stored comic projects.</p>
+            </div>
+            <button class="btn btn-ghost" id="viewAllProjectsBtn">
+              <span>View All</span>
+              <i data-lucide="arrow-right"></i>
+            </button>
+          </div>
+
+          <div class="comics-grid" id="recentProjectsGrid">
+            <!-- Populated via script from database -->
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 2: CREATE COMIC -->
+      <section id="createComicView" class="view-screen">
+        <div class="page-header">
+          <h1 class="page-title">Create Your Comic</h1>
+          <p class="page-desc">Define your story parameters and let AI build the visual narrative.</p>
+        </div>
+
+        <form id="comicCreateForm" class="create-form-card">
+          <div class="form-group">
+            <label class="form-label">Story Idea & Prompt</label>
+            <textarea name="prompt" id="storyPromptInput" required class="form-textarea" placeholder="Describe your story idea… (e.g. A student discovers a mysterious robot in college.)"></textarea>
+            <span class="form-help">Tip: Mention the core conflict, goal, or key scenario for better AI story generation.</span>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Main Character Name</label>
+              <input type="text" name="character_name" required class="form-input" placeholder="e.g. Alex" value="Alex">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Setting / Location</label>
+              <input type="text" name="setting" required class="form-input" placeholder="e.g. College Innovation Lab" value="College Innovation Lab">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Art Style</label>
+              <select name="art_style" class="form-select">
+                <option value="comic book" selected>Comic Book</option>
+                <option value="anime">Anime / Manga</option>
+                <option value="cartoon">Modern Cartoon</option>
+                <option value="watercolor">Soft Watercolor</option>
+                <option value="fantasy illustration">Fantasy Illustration</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Tone / Mood</label>
+              <select name="tone" class="form-select">
+                <option value="adventurous" selected>Adventurous</option>
+                <option value="mysterious">Mysterious</option>
+                <option value="funny">Funny & Lighthearted</option>
+                <option value="dramatic">Dramatic</option>
+                <option value="heartwarming">Heartwarming</option>
+                <option value="action-packed">Action-Packed</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Number of Panels</label>
+              <select name="panels" class="form-select">
+                <option value="2">2 Panels</option>
+                <option value="4" selected>4 Panels</option>
+                <option value="6">6 Panels</option>
+                <option value="8">8 Panels</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Advanced Options Accordion -->
+          <details class="advanced-options">
+            <summary class="advanced-summary">
+              <i data-lucide="settings"></i>
+              <span>Advanced Story Options</span>
+            </summary>
+            <div class="advanced-content">
+              <div class="form-row mt-16">
+                <div class="form-group">
+                  <label class="form-label">Character Style</label>
+                  <input type="text" name="character_style" class="form-input" placeholder="e.g. Student with glasses and blue hoodie">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Dialogue Complexity</label>
+                  <select name="dialogue_style" class="form-select">
+                    <option value="concise" selected>Concise & Direct</option>
+                    <option value="expressive">Expressive & Detailed</option>
+                    <option value="academic">Academic & Informative</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </details>
+
+          <div class="form-actions mt-24">
+            <button type="submit" class="btn btn-cta" id="startGenerateBtn">
+              <i data-lucide="sparkles"></i>
+              <span>Generate Comic</span>
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- VIEW 3: AI GENERATION FLOW MODAL/OVERLAY -->
+      <div id="aiProgressModal" class="modal-backdrop">
+        <div class="progress-card">
+          <div class="progress-header">
+            <div class="progress-spinner">
+              <i data-lucide="sparkles" class="spin-icon"></i>
+            </div>
+            <h2 class="progress-title">Creating Your Comic</h2>
+            <p class="progress-subtitle">Please wait while AI processes your narrative structure...</p>
+          </div>
+
+          <div class="steps-list">
+            <div class="step-item" id="step1">
+              <div class="step-icon"><i data-lucide="circle"></i></div>
+              <span class="step-label">1. Understanding Your Idea</span>
+            </div>
+            <div class="step-item" id="step2">
+              <div class="step-icon"><i data-lucide="circle"></i></div>
+              <span class="step-label">2. Creating the Story</span>
+            </div>
+            <div class="step-item" id="step3">
+              <div class="step-icon"><i data-lucide="circle"></i></div>
+              <span class="step-label">3. Designing Characters</span>
+            </div>
+            <div class="step-item" id="step4">
+              <div class="step-icon"><i data-lucide="circle"></i></div>
+              <span class="step-label">4. Generating Dialogues</span>
+            </div>
+            <div class="step-item" id="step5">
+              <div class="step-icon"><i data-lucide="circle"></i></div>
+              <span class="step-label">5. Creating Comic Panels</span>
+            </div>
+            <div class="step-item" id="step6">
+              <div class="step-icon"><i data-lucide="circle"></i></div>
+              <span class="step-label">6. Finalizing Your Comic</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW 4: STORY PREVIEW -->
+      <section id="storyPreviewView" class="view-screen">
+        <div class="page-header-flex">
+          <div>
+            <h1 class="page-title">Story & Script Preview</h1>
+            <p class="page-desc">Review and refine your script before building panel artwork.</p>
+          </div>
+          <div class="header-actions">
+            <button class="btn btn-secondary" id="editStoryScriptBtn">
+              <i data-lucide="pencil"></i>
+              <span>Edit Story</span>
+            </button>
+            <button class="btn btn-primary" id="proceedToEditorBtn">
+              <i data-lucide="panels-top-left"></i>
+              <span>Open Comic Editor</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="story-preview-grid">
+          <div class="story-details-card">
+            <h3 class="card-subtitle">Story Summary</h3>
+            <h2 class="preview-story-title" id="previewStoryTitle">The College Discovery</h2>
+            <div class="meta-tags">
+              <span class="tag" id="previewToneTag"><i data-lucide="file-text"></i> Adventurous</span>
+              <span class="tag" id="previewStyleTag"><i data-lucide="sparkles"></i> Comic Book</span>
+              <span class="tag" id="previewPanelsTag"><i data-lucide="panels-top-left"></i> 4 Panels</span>
+            </div>
+            <div class="panels-script-list" id="panelsScriptList">
+              <!-- Script items generated dynamically -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 5: COMIC EDITOR -->
+      <section id="editorView" class="view-screen">
+        <div class="editor-header">
+          <div class="editor-title-wrap">
+            <input type="text" class="editor-title-input" id="editorTitleInput" value="Untitled Comic Story">
+            <span class="badge badge-indigo">Editor Mode</span>
+          </div>
+          <div class="editor-header-actions">
+            <button class="btn btn-outline btn-sm" id="editorAddPanelBtn">
+              <i data-lucide="plus"></i>
+              <span>Add Panel</span>
+            </button>
+            <button class="btn btn-secondary btn-sm" id="editorPreviewModalBtn">
+              <i data-lucide="eye"></i>
+              <span>Final Preview</span>
+            </button>
+            <button class="btn btn-primary btn-sm" id="editorExportBtn">
+              <i data-lucide="download"></i>
+              <span>Export Comic</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="editor-workspace">
+          <!-- Left: Panel Thumbnails Sidebar -->
+          <div class="editor-sidebar-left">
+            <h4 class="sidebar-section-title">Panels</h4>
+            <div class="panel-thumbnails-list" id="panelThumbnailsList">
+              <!-- Thumbnails populated dynamically -->
+            </div>
+          </div>
+
+          <!-- Center: Main Canvas Panel Display -->
+          <div class="editor-canvas-center">
+            <div class="active-panel-stage" id="activePanelStage">
+              <!-- Rendered panel artwork & bubbles -->
+            </div>
+          </div>
+
+          <!-- Right: Editing Controls -->
+          <div class="editor-sidebar-right">
+            <h4 class="sidebar-section-title">Panel Controls</h4>
+            <div class="controls-form">
+              <div class="form-group">
+                <label class="form-label-sm">Panel Title</label>
+                <input type="text" id="ctrlPanelTitle" class="form-input-sm">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label-sm">Narration Caption</label>
+                <textarea id="ctrlNarration" class="form-textarea-sm" rows="3"></textarea>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label-sm">Character Dialogue</label>
+                <textarea id="ctrlDialogue" class="form-textarea-sm" rows="3"></textarea>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label-sm">Bubble Style</label>
+                <select id="ctrlBubbleStyle" class="form-select-sm">
+                  <option value="standard">Standard Speech Bubble</option>
+                  <option value="thought">Thought Bubble</option>
+                  <option value="shout">Action Shout</option>
+                </select>
+              </div>
+
+              <div class="controls-divider"></div>
+
+              <div class="btn-grid-2">
+                <button class="btn btn-outline btn-sm" id="ctrlRegenerateBtn">
+                  <i data-lucide="sparkles"></i>
+                  <span>Regenerate</span>
+                </button>
+                <button class="btn btn-danger-outline btn-sm" id="ctrlDeletePanelBtn">
+                  <i data-lucide="trash-2"></i>
+                  <span>Delete Panel</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 6: FINAL COMIC PREVIEW -->
+      <section id="finalPreviewView" class="view-screen">
+        <div class="page-header-flex">
+          <div>
+            <h1 class="page-title">Final Comic Preview</h1>
+            <p class="page-desc">Inspect your complete comic publication before saving or downloading.</p>
+          </div>
+          <div class="header-actions">
+            <button class="btn btn-outline" id="finalBackToEditorBtn">
+              <i data-lucide="pencil"></i>
+              <span>Back to Editor</span>
+            </button>
+            <button class="btn btn-secondary" id="finalSaveBtn">
+              <i data-lucide="book-open"></i>
+              <span>Save Project</span>
+            </button>
+            <button class="btn btn-primary" id="finalDownloadBtn">
+              <i data-lucide="download"></i>
+              <span>Download PDF</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="final-comic-board" id="finalComicBoard">
+          <!-- Full rendered multi-panel comic sheet -->
+        </div>
+      </section>
+
+      <!-- VIEW 7: MY COMICS -->
+      <section id="myComicsView" class="view-screen">
+        <div class="page-header-flex">
+          <div>
+            <h1 class="page-title">My Comics</h1>
+            <p class="page-desc">Manage all your created comic projects and drafts.</p>
+          </div>
+          <button class="btn btn-primary" id="myComicsNewBtn">
+            <i data-lucide="plus"></i>
+            <span>New Comic</span>
+          </button>
+        </div>
+
+        <div class="filter-tabs">
+          <button class="filter-btn active" data-filter="all">All Comics</button>
+          <button class="filter-btn" data-filter="completed">Completed</button>
+          <button class="filter-btn" data-filter="drafts">Drafts</button>
+        </div>
+
+        <div class="comics-grid" id="myComicsGrid">
+          <!-- Loaded dynamically from SQLite Database -->
+        </div>
+      </section>
+
+      <!-- VIEW 8: CHARACTERS -->
+      <section id="charactersView" class="view-screen">
+        <div class="page-header-flex">
+          <div>
+            <h1 class="page-title">Character Management</h1>
+            <p class="page-desc">Define recurring characters to ensure visual consistency across stories.</p>
+          </div>
+          <button class="btn btn-primary" id="createCharModalBtn">
+            <i data-lucide="plus"></i>
+            <span>Create Character</span>
+          </button>
+        </div>
+
+        <div class="characters-grid" id="charactersGrid">
+          <div class="character-card">
+            <div class="char-avatar-box">
+              <i data-lucide="user"></i>
+            </div>
+            <div class="char-details">
+              <h3 class="char-name">Alex</h3>
+              <span class="char-role">Protagonist</span>
+              <p class="char-desc">A curious computer science student fascinated by robotics and AI innovation.</p>
+              <div class="char-tags">
+                <span class="tag"><i data-lucide="book-open"></i> 3 Comics</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="character-card">
+            <div class="char-avatar-box alt-bg">
+              <i data-lucide="bot"></i>
+            </div>
+            <div class="char-details">
+              <h3 class="char-name">Unit-7</h3>
+              <span class="char-role">Companion Robot</span>
+              <p class="char-desc">An abandoned campus lab prototype with advanced problem-solving algorithms.</p>
+              <div class="char-tags">
+                <span class="tag"><i data-lucide="book-open"></i> 2 Comics</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="character-card">
+            <div class="char-avatar-box cyan-bg">
+              <i data-lucide="user-check"></i>
+            </div>
+            <div class="char-details">
+              <h3 class="char-name">Prof. Sharma</h3>
+              <span class="char-role">Mentor</span>
+              <p class="char-desc">Head of the college innovation center who guides students in national hackathons.</p>
+              <div class="char-tags">
+                <span class="tag"><i data-lucide="book-open"></i> 4 Comics</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 9: GALLERY -->
+      <section id="galleryView" class="view-screen">
+        <div class="page-header">
+          <h1 class="page-title">Student Gallery</h1>
+          <p class="page-desc">Explore creative comic publications built by student innovators.</p>
+        </div>
+
+        <div class="gallery-grid" id="galleryGrid">
+          <!-- Gallery Cards -->
+        </div>
+      </section>
+
+      <!-- VIEW 10: TEMPLATES -->
+      <section id="templatesView" class="view-screen">
+        <div class="page-header">
+          <h1 class="page-title">Story Templates</h1>
+          <p class="page-desc">Choose a pre-structured template to accelerate your story creation.</p>
+        </div>
+
+        <div class="templates-grid">
+          <div class="template-card" data-template="college-adventure">
+            <div class="template-badge">Popular</div>
+            <div class="template-icon"><i data-lucide="graduation-cap"></i></div>
+            <h3 class="template-title">College Adventure</h3>
+            <p class="template-desc">Explore campus mysteries, hackathons, and student tech discovery stories.</p>
+            <button class="btn btn-outline btn-sm use-template-btn">Use Template</button>
+          </div>
+
+          <div class="template-card" data-template="mystery">
+            <div class="template-icon"><i data-lucide="compass"></i></div>
+            <h3 class="template-title">Mystery</h3>
+            <p class="template-desc">Uncover hidden clues, secret codes, and enigmatic challenges.</p>
+            <button class="btn btn-outline btn-sm use-template-btn">Use Template</button>
+          </div>
+
+          <div class="template-card" data-template="science-fiction">
+            <div class="template-icon"><i data-lucide="atom"></i></div>
+            <h3 class="template-title">Science Fiction</h3>
+            <p class="template-desc">Futuristic robotics, space exploration, and AI innovations.</p>
+            <button class="btn btn-outline btn-sm use-template-btn">Use Template</button>
+          </div>
+
+          <div class="template-card" data-template="friendship">
+            <div class="template-icon"><i data-lucide="heart"></i></div>
+            <h3 class="template-title">Friendship</h3>
+            <p class="template-desc">Heartwarming stories about team collaboration and mutual support.</p>
+            <button class="btn btn-outline btn-sm use-template-btn">Use Template</button>
+          </div>
+
+          <div class="template-card" data-template="environmental">
+            <div class="template-icon"><i data-lucide="leaf"></i></div>
+            <h3 class="template-title">Environmental Story</h3>
+            <p class="template-desc">Campus green initiatives, clean energy, and sustainability challenges.</p>
+            <button class="btn btn-outline btn-sm use-template-btn">Use Template</button>
+          </div>
+
+          <div class="template-card" data-template="innovation">
+            <div class="template-icon"><i data-lucide="lightbulb"></i></div>
+            <h3 class="template-title">Innovation Story</h3>
+            <p class="template-desc">Developing solutions for social impact and engineering contests.</p>
+            <button class="btn btn-outline btn-sm use-template-btn">Use Template</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 11: SETTINGS -->
+      <section id="settingsView" class="view-screen">
+        <div class="page-header">
+          <h1 class="page-title">Settings</h1>
+          <p class="page-desc">Configure application preferences and export options.</p>
+        </div>
+
+        <div class="create-form-card">
+          <div class="form-group">
+            <label class="form-label">Default Art Style Preference</label>
+            <select class="form-select">
+              <option>Comic Book</option>
+              <option>Anime / Manga</option>
+              <option>Modern Cartoon</option>
+            </select>
+          </div>
+
+          <div class="form-group mt-16">
+            <label class="form-label">Export Resolution Quality</label>
+            <select class="form-select">
+              <option>High Resolution (300 DPI)</option>
+              <option>Standard Web Quality (150 DPI)</option>
+            </select>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/static/script.js"></script>
+</body>
+</html>
